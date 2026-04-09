@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>MyStudent | Perfil</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body data-page="profile">
+  <div class="app-shell">
+    <aside class="sidebar">
+      <div class="sidebar-brand">
+        <h1>MyStudent</h1>
+        <p>Educación, progreso y comunidad.</p>
+      </div>
+
+      <nav class="sidebar-nav">
+        <a class="nav-btn" href="dashboard.html">Dashboard</a>
+        <a class="nav-btn active" href="profile.html">Perfil</a>
+        <a class="nav-btn" href="chat.html">Chat</a>
+        <a class="nav-btn" href="store.html">Tienda</a>
+        <a class="nav-btn" href="settings.html">Ajustes</a>
+        <a class="nav-btn hidden" href="admin.html" id="admin-link">Admin</a>
+      </nav>
+
+      <button id="logout-button" class="nav-btn logout" type="button">Cerrar sesión</button>
+    </aside>
+
+    <main class="shell-main">
+      <header class="topbar">
+        <div class="topbar-copy">
+          <h2 id="topbar-title">Tu perfil</h2>
+          <p>Identidad, progreso y edición rápida.</p>
+        </div>
+
+        <div class="topbar-actions">
+          <div class="notif-shell">
+            <button id="notifications-toggle" class="ghost-btn notif-button" type="button">Notificaciones <span id="notifications-count" class="notif-badge hidden">0</span></button>
+            <div id="notifications-dropdown" class="notif-dropdown hidden"></div>
+          </div>
+          <button id="theme-toggle" class="ghost-btn theme-toggle" type="button">Tema</button>
+          <div class="user-pill">
+            <div class="user-avatar" id="user-avatar">MS</div>
+            <div class="user-meta">
+              <strong id="topbar-username">usuario</strong>
+              <span id="topbar-range">Free</span>
+            </div>
+          </div>
+        </div>
+      </header>
+
+      <section id="announcement-banner" class="announcement-banner hidden"></section>
+
+      <section class="section-hero">
+        <h3>Perfil</h3>
+        <p>Todo lo importante en una vista limpia y editable.</p>
+      </section>
+
+      <section class="profile-grid">
+        <article class="card profile-hero-card">
+          <div class="profile-banner" id="profile-banner"></div>
+          <div class="profile-hero">
+            <div class="profile-avatar-large" id="profile-avatar-large">MS</div>
+            <div>
+              <span class="card-label">Estudiante</span>
+              <h3 id="profile-fullname">Cargando...</h3>
+              <p id="profile-tagline">Sincronizando datos...</p>
+              <div class="inline-meta">
+                <span class="badge free" id="profile-rank-badge">Free</span>
+                <span class="mini-chip" id="profile-role-chip">user</span>
+                <span class="mini-chip" id="profile-level-chip">Nivel 1</span>
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <article class="card"><span class="card-label">Email</span><strong class="card-value" id="profile-email">-</strong></article>
+        <article class="card"><span class="card-label">Username</span><strong class="card-value" id="profile-username">@usuario</strong></article>
+        <article class="card"><span class="card-label">Curso</span><strong class="card-value" id="profile-course">-</strong></article>
+        <article class="card"><span class="card-label">Coins</span><strong class="card-value" id="profile-coins">0</strong></article>
+        <article class="card"><span class="card-label">UID</span><strong class="card-value profile-uid" id="profile-uid">-</strong></article>
+      </section>
+
+      <section class="settings-grid">
+        <article class="card">
+          <h3>Editar perfil</h3>
+          <form id="profile-edit-form" class="auth-form">
+            <div class="form-grid">
+              <div class="field"><label for="profile-edit-name">Nombre</label><input id="profile-edit-name" name="nombre" type="text" /></div>
+              <div class="field"><label for="profile-edit-lastname">Apellido</label><input id="profile-edit-lastname" name="apellido" type="text" /></div>
+            </div>
+            <div class="form-grid">
+              <div class="field"><label for="profile-edit-username">Username</label><input id="profile-edit-username" name="username" type="text" /></div>
+              <div class="field">
+                <label for="profile-edit-course">Curso</label>
+                <select id="profile-edit-course" name="curso">
+                  <option value="">Selecciona tu etapa</option>
+                  <option value="ESO">1º ESO</option>
+                  <option value="ESO">2º ESO</option>
+                  <option value="ESO">3º ESO</option>
+                  <option value="ESO">4º ESO</option>
+                  <option value="Bachillerato">Bachillerato</option>
+                  <option value="FP">FP</option>
+                  <option value="Universidad">Universidad</option>
+                  <option value="Oposiciones">Oposiciones</option>
+                </select>
+              </div>
+            </div>
+            <button class="primary-btn" type="submit">Guardar cambios</button>
+          </form>
+          <p id="profile-edit-status" class="auth-status"></p>
+        </article>
+
+        <article class="card">
+          <h3>Cambiar contraseña</h3>
+          <form id="profile-password-form" class="auth-form">
+            <div class="field"><label for="profile-new-password">Nueva contraseña</label><input id="profile-new-password" name="password" type="password" minlength="6" /></div>
+            <button class="ghost-btn" type="submit">Actualizar contraseña</button>
+          </form>
+          <p id="profile-password-status" class="auth-status"></p>
+        </article>
+
+        <article class="card">
+          <h3>Personalizacion</h3>
+          <form id="profile-customization-form" class="auth-form">
+            <div class="form-grid">
+              <div class="field">
+                <label for="profile-avatar-emoji">Avatar</label>
+                <select id="profile-avatar-emoji" name="avatarEmoji">
+                  <option value="MS">MS</option>
+                  <option value="🎓">🎓</option>
+                  <option value="📚">📚</option>
+                  <option value="🚀">🚀</option>
+                  <option value="🧠">🧠</option>
+                  <option value="✨">✨</option>
+                </select>
+              </div>
+              <div class="field">
+                <label for="profile-banner-color">Banner</label>
+                <select id="profile-banner-color" name="bannerColor">
+                  <option value="#dbeafe">Azul suave</option>
+                  <option value="#dcfce7">Verde suave</option>
+                  <option value="#fef3c7">Dorado suave</option>
+                  <option value="#fae8ff">Lavanda suave</option>
+                </select>
+              </div>
+            </div>
+            <div class="field">
+              <label for="profile-accent-color">Color del perfil</label>
+              <select id="profile-accent-color" name="profileAccent">
+                <option value="#2563eb">Azul</option>
+                <option value="#059669">Verde</option>
+                <option value="#d97706">Ambar</option>
+                <option value="#7c3aed">Violeta</option>
+              </select>
+            </div>
+            <button class="ghost-btn" type="submit">Guardar estilo</button>
+          </form>
+          <p id="profile-customization-status" class="auth-status"></p>
+        </article>
+      </section>
+
+      <section class="quick-grid">
+        <article class="card">
+          <h3>Progreso</h3>
+          <div class="progress-shell">
+            <div class="progress-head"><span id="profile-progress-label">Nivel 1</span><span id="profile-progress-percent">0%</span></div>
+            <div class="progress-track"><div class="progress-bar" id="profile-progress-bar" style="width: 0%;"></div></div>
+          </div>
+          <div class="inline-meta">
+            <span class="mini-chip" id="profile-xp-chip">XP 0</span>
+            <span class="mini-chip" id="profile-status-chip">Cuenta activa</span>
+          </div>
+        </article>
+
+        <article class="card">
+          <h3>Accesos</h3>
+          <div class="inline-meta">
+            <a class="mini-chip mini-chip-link" href="dashboard.html">Dashboard</a>
+            <a class="mini-chip mini-chip-link" href="chat.html">Chat</a>
+            <a class="mini-chip mini-chip-link" href="store.html">Tienda</a>
+            <a class="mini-chip mini-chip-link" href="settings.html">Ajustes</a>
+            <a class="mini-chip mini-chip-link hidden" href="admin.html" id="profile-admin-chip">Admin</a>
+          </div>
+        </article>
+
+        <article class="card">
+          <h3>Logros</h3>
+          <div id="profile-achievements" class="inline-meta"></div>
+        </article>
+      </section>
+    </main>
+  </div>
+
+  <script defer src="app.js"></script>
+</body>
+</html>

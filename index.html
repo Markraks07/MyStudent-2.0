@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>MyStudent | Acceso</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body data-page="index">
+  <main class="auth-shell">
+    <aside class="auth-aside">
+      <div class="auth-brand">
+        <span class="brand-badge">MyStudent SaaS</span>
+        <h1>Aprende con ritmo, comunidad y progreso real.</h1>
+        <p>
+          Plataforma educativa para estudiantes de ESO, Bachillerato, FP y universidad
+          con autenticación, dashboard, chat en tiempo real y control administrativo.
+        </p>
+        <section class="feature-grid auth-feature-grid">
+          <article class="card feature-card">
+            <h3>Dashboard con XP</h3>
+            <p>Visualiza nivel, rango, curso y evolución académica de forma clara.</p>
+          </article>
+          <article class="card feature-card">
+            <h3>Chat Global</h3>
+            <p>Participa en conversaciones en tiempo real con otros estudiantes.</p>
+          </article>
+          <article class="card feature-card">
+            <h3>Admin Panel</h3>
+            <p>Gestiona usuarios, aplica bans y sube cuentas a VIP desde un mismo panel.</p>
+          </article>
+        </section>
+      </div>
+    </aside>
+
+    <section class="auth-panel">
+      <div class="auth-card">
+        <div class="auth-switcher">
+          <button class="switch-btn active" type="button" data-auth-mode="login">Login</button>
+          <button class="switch-btn" type="button" data-auth-mode="register">Register</button>
+        </div>
+
+        <section class="auth-view" id="login-view">
+          <div class="auth-header">
+            <h2>Accede a tu cuenta</h2>
+            <p>Entra en MyStudent para abrir tu dashboard, el chat y tus datos sincronizados.</p>
+          </div>
+
+          <form id="login-form" class="auth-form" autocomplete="on">
+            <div class="field">
+              <label for="login-email">Email</label>
+              <input id="login-email" name="email" type="email" placeholder="tu@email.com" required />
+            </div>
+
+            <div class="field">
+              <label for="login-password">Contraseña</label>
+              <input id="login-password" name="password" type="password" placeholder="Mínimo 6 caracteres" required />
+            </div>
+
+            <button class="auth-submit" type="submit">Entrar</button>
+          </form>
+        </section>
+
+        <section class="auth-view hidden" id="register-view">
+          <div class="auth-header">
+            <h2>Crea tu cuenta</h2>
+            <p>Registra tu perfil académico y empieza con tu rango Free y nivel inicial.</p>
+          </div>
+
+          <form id="register-form" class="auth-form" autocomplete="on">
+            <div class="form-grid">
+              <div class="field">
+                <label for="register-name">Nombre</label>
+                <input id="register-name" name="nombre" type="text" placeholder="Nombre" required />
+              </div>
+
+              <div class="field">
+                <label for="register-lastname">Apellido</label>
+                <input id="register-lastname" name="apellido" type="text" placeholder="Apellido" required />
+              </div>
+            </div>
+
+            <div class="form-grid">
+              <div class="field">
+                <label for="register-username">Username</label>
+                <input id="register-username" name="username" type="text" placeholder="usuario123" required />
+              </div>
+
+              <div class="field">
+                <label for="register-course">Curso</label>
+                <select id="register-course" name="curso" required>
+                  <option value="">Selecciona tu etapa</option>
+                  <option value="ESO">ESO</option>
+                  <option value="Bachillerato">Bachillerato</option>
+                  <option value="FP">FP</option>
+                  <option value="Universidad">Universidad</option>
+                  <option value="Oposiciones">Oposiciones</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="field">
+              <label for="register-email">Email</label>
+              <input id="register-email" name="email" type="email" placeholder="tu@email.com" required />
+            </div>
+
+            <div class="form-grid">
+              <div class="field">
+                <label for="register-password">Contraseña</label>
+                <input id="register-password" name="password" type="password" placeholder="Mínimo 6 caracteres" required />
+              </div>
+
+              <div class="field">
+                <label for="register-confirm-password">Confirmar contraseña</label>
+                <input id="register-confirm-password" name="confirmPassword" type="password" placeholder="Repite la contraseña" required />
+              </div>
+            </div>
+
+            <button class="auth-submit" type="submit">Crear cuenta</button>
+          </form>
+        </section>
+
+        <p id="auth-status" class="auth-status"></p>
+      </div>
+    </section>
+  </main>
+
+  <script defer src="app.js"></script>
+</body>
+</html>

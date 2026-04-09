@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>MyStudent | Dashboard</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body data-page="dashboard">
+  <div class="app-shell">
+    <aside class="sidebar">
+      <div class="sidebar-brand">
+        <h1>MyStudent</h1>
+        <p>Educación, progreso y comunidad.</p>
+      </div>
+
+      <nav class="sidebar-nav">
+        <a class="nav-btn active" href="dashboard.html">Dashboard</a>
+        <a class="nav-btn" href="profile.html">Perfil</a>
+        <a class="nav-btn" href="chat.html">Chat</a>
+        <a class="nav-btn" href="store.html">Tienda</a>
+        <a class="nav-btn" href="settings.html">Ajustes</a>
+        <a class="nav-btn hidden" href="admin.html" id="admin-link">Admin</a>
+      </nav>
+
+      <button id="logout-button" class="nav-btn logout" type="button">Cerrar sesión</button>
+    </aside>
+
+    <main class="shell-main">
+      <header class="topbar">
+        <div class="topbar-copy">
+          <h2 id="topbar-title">Hola</h2>
+          <p>Resumen de cuenta y evolución académica.</p>
+        </div>
+
+        <div class="topbar-actions">
+          <div class="notif-shell">
+            <button id="notifications-toggle" class="ghost-btn notif-button" type="button">Notificaciones <span id="notifications-count" class="notif-badge hidden">0</span></button>
+            <div id="notifications-dropdown" class="notif-dropdown hidden"></div>
+          </div>
+          <button id="theme-toggle" class="ghost-btn theme-toggle" type="button">Tema</button>
+          <div class="user-pill">
+            <div class="user-avatar" id="user-avatar">MS</div>
+            <div class="user-meta">
+              <strong id="topbar-username">usuario</strong>
+              <span id="topbar-range">Free</span>
+            </div>
+          </div>
+        </div>
+      </header>
+
+      <section id="announcement-banner" class="announcement-banner hidden"></section>
+
+      <section class="section-hero">
+        <h3>Dashboard</h3>
+        <p>Lo importante para volver cada día sin saturación visual.</p>
+      </section>
+
+      <section class="stats-grid">
+        <article class="stat-card"><span>XP total</span><strong id="user-xp">0</strong></article>
+        <article class="stat-card"><span>Nivel</span><strong id="user-level">1</strong></article>
+        <article class="stat-card"><span>Rango</span><strong id="user-rank-card">Free</strong></article>
+      </section>
+
+      <section class="dashboard-grid">
+        <article class="card"><span class="card-label">Nombre completo</span><strong class="card-value" id="user-fullname">Cargando...</strong></article>
+        <article class="card"><span class="card-label">Username</span><strong class="card-value" id="user-username">@usuario</strong></article>
+        <article class="card"><span class="card-label">Curso</span><strong class="card-value" id="user-course">No definido</strong></article>
+        <article class="card"><span class="card-label">Rol</span><strong class="card-value" id="user-role">user</strong></article>
+      </section>
+
+      <section class="card mt-18">
+        <h3>Progreso al siguiente nivel</h3>
+        <div class="progress-shell">
+          <div class="progress-head"><span id="progress-label">Nivel 1</span><span id="progress-percent">0%</span></div>
+          <div class="progress-track"><div class="progress-bar" id="progress-bar" style="width: 0%;"></div></div>
+        </div>
+      </section>
+
+      <section class="quick-grid">
+        <article class="card">
+          <h3>Cuenta</h3>
+          <div class="inline-meta">
+            <span class="mini-chip" id="account-email">Email</span>
+            <span class="mini-chip" id="account-status">Activa</span>
+          </div>
+        </article>
+        <article class="card">
+          <h3>Accesos</h3>
+          <div class="inline-meta">
+            <a class="mini-chip mini-chip-link" href="profile.html">Perfil</a>
+            <a class="mini-chip mini-chip-link" href="chat.html">Chat</a>
+            <a class="mini-chip mini-chip-link" href="store.html">Tienda</a>
+            <a class="mini-chip mini-chip-link" href="settings.html">Ajustes</a>
+            <a class="mini-chip mini-chip-link hidden" href="admin.html" id="dashboard-admin-chip">Admin</a>
+          </div>
+        </article>
+      </section>
+    </main>
+  </div>
+
+  <div id="onboarding-overlay" class="onboarding-overlay hidden" aria-hidden="true">
+    <div class="onboarding-dialog">
+      <div class="onboarding-progress">
+        <span id="onboarding-step-label">Paso 1 de 5</span>
+        <div class="progress-track"><div id="onboarding-progress-bar" class="progress-bar" style="width: 20%;"></div></div>
+      </div>
+
+      <section class="onboarding-step" data-step="1">
+        <span class="card-label">Bienvenida</span>
+        <h3>Bienvenido a MyStudent</h3>
+        <p>Vamos a prepararte una experiencia clara y útil en muy poco tiempo.</p>
+      </section>
+
+      <section class="onboarding-step hidden" data-step="2">
+        <span class="card-label">Datos básicos</span>
+        <h3>Confirma tu perfil</h3>
+        <p>Revisamos tu información principal antes de continuar.</p>
+        <form id="onboarding-profile-form" class="auth-form">
+          <div class="form-grid">
+            <div class="field"><label for="onboarding-name">Nombre</label><input id="onboarding-name" name="nombre" type="text" required /></div>
+            <div class="field"><label for="onboarding-lastname">Apellido</label><input id="onboarding-lastname" name="apellido" type="text" required /></div>
+          </div>
+          <div class="form-grid">
+            <div class="field"><label for="onboarding-username">Username</label><input id="onboarding-username" name="username" type="text" required /></div>
+            <div class="field">
+              <label for="onboarding-course">Curso</label>
+              <select id="onboarding-course" name="curso" required>
+                <option value="">Selecciona tu etapa</option>
+                <option value="ESO">ESO</option>
+                <option value="Bachillerato">Bachillerato</option>
+                <option value="FP">FP</option>
+                <option value="Universidad">Universidad</option>
+                <option value="Oposiciones">Oposiciones</option>
+              </select>
+            </div>
+          </div>
+        </form>
+      </section>
+
+      <section class="onboarding-step hidden" data-step="3">
+        <span class="card-label">Personalización</span>
+        <h3>Personaliza tu experiencia</h3>
+        <p>Elige tema y define si quieres recibir avisos de actividad.</p>
+        <div class="onboarding-options">
+          <div class="theme-choice-group">
+            <button type="button" class="theme-choice" data-onboarding-theme="light">Tema claro</button>
+            <button type="button" class="theme-choice" data-onboarding-theme="dark">Tema oscuro</button>
+            <button type="button" class="theme-choice" data-onboarding-theme="glass">Liquid Glass</button>
+          </div>
+          <label class="toggle-row ios-toggle-row">
+            <span>Activar notificaciones</span>
+            <span class="toggle-control">
+              <input id="onboarding-notifications" type="checkbox" checked />
+              <span class="toggle"></span>
+            </span>
+          </label>
+        </div>
+      </section>
+
+      <section class="onboarding-step hidden" data-step="4">
+        <span class="card-label">Intro rápida</span>
+        <h3>Así funciona MyStudent</h3>
+        <p>Aquí podrás gestionar tus estudios, hablar con otros estudiantes y mejorar tu progreso.</p>
+      </section>
+
+      <section class="onboarding-step hidden" data-step="5">
+        <span class="card-label">Entrar</span>
+        <h3>Todo listo</h3>
+        <p>Ya puedes acceder al dashboard y empezar a usar la plataforma.</p>
+      </section>
+
+      <div class="onboarding-actions">
+        <button id="onboarding-back" class="ghost-btn hidden" type="button">Atrás</button>
+        <button id="onboarding-next" class="primary-btn" type="button">Continuar</button>
+      </div>
+      <p id="onboarding-status" class="auth-status"></p>
+    </div>
+  </div>
+
+  <script defer src="app.js"></script>
+</body>
+</html>

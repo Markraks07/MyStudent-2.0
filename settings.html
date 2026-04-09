@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>MyStudent | Ajustes</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap"
+    rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+
+<body data-page="settings">
+  <div class="app-shell">
+    <aside class="sidebar">
+      <div class="sidebar-brand">
+        <h1>MyStudent</h1>
+        <p>Educación, progreso y comunidad.</p>
+      </div>
+
+      <nav class="sidebar-nav">
+        <a class="nav-btn" href="dashboard.html">Dashboard</a>
+        <a class="nav-btn" href="profile.html">Perfil</a>
+        <a class="nav-btn" href="chat.html">Chat</a>
+        <a class="nav-btn" href="store.html">Tienda</a>
+        <a class="nav-btn active" href="settings.html">Ajustes</a>
+        <a class="nav-btn hidden" href="admin.html" id="admin-link">Admin</a>
+      </nav>
+
+      <button id="logout-button" class="nav-btn logout" type="button">Cerrar sesión</button>
+    </aside>
+
+    <main class="shell-main">
+      <header class="topbar">
+        <div class="topbar-copy">
+          <h2 id="topbar-title">Ajustes</h2>
+          <p>Preferencias esenciales de la cuenta y experiencia.</p>
+        </div>
+
+        <div class="topbar-actions">
+          <div class="notif-shell">
+            <button id="notifications-toggle" class="ghost-btn notif-button" type="button">Notificaciones <span
+                id="notifications-count" class="notif-badge hidden">0</span></button>
+            <div id="notifications-dropdown" class="notif-dropdown hidden"></div>
+          </div>
+          <button id="theme-toggle" class="ghost-btn theme-toggle" type="button">Tema</button>
+          <div class="user-pill">
+            <div class="user-avatar" id="user-avatar">MS</div>
+            <div class="user-meta">
+              <strong id="topbar-username">usuario</strong>
+              <span id="topbar-range">Free</span>
+            </div>
+          </div>
+        </div>
+      </header>
+
+      <section id="announcement-banner" class="announcement-banner hidden"></section>
+
+      <section class="section-hero">
+        <h3>Settings</h3>
+        <p>Cuenta, apariencia, notificaciones, privacidad y preferencias generales.</p>
+      </section>
+
+      <section class="settings-grid glass-surface-grid">
+        <article class="card glass glass-card">
+          <h3>Account Settings</h3>
+          <form id="settings-account-form" class="auth-form">
+            <div class="form-grid">
+              <div class="field"><label for="settings-name">Nombre</label><input id="settings-name" name="nombre"
+                  type="text" /></div>
+              <div class="field"><label for="settings-lastname">Apellido</label><input id="settings-lastname"
+                  name="apellido" type="text" /></div>
+            </div>
+            <div class="form-grid">
+              <div class="field"><label for="settings-username">Username</label><input id="settings-username"
+                  name="username" type="text" /></div>
+              <div class="field">
+                <label for="settings-course">Curso</label>
+                <select id="settings-course" name="curso">
+                  <option value="">Selecciona tu etapa</option>
+                  <option value="ESO">1º ESO</option>
+                  <option value="ESO">2º ESO</option>
+                  <option value="ESO">3º ESO</option>
+                  <option value="ESO">4º ESO</option>
+                  <option value="Bachillerato">Bachillerato</option>
+                  <option value="FP">FP</option>
+                  <option value="Universidad">Universidad</option>
+                  <option value="Oposiciones">Oposiciones</option>
+                </select>
+              </div>
+            </div>
+            <button class="primary-btn glass-button" type="submit">Guardar cuenta</button>
+          </form>
+          <p id="settings-account-status" class="auth-status"></p>
+        </article>
+
+        <article class="card glass glass-card">
+          <h3>Appearance</h3>
+          <form id="settings-appearance-form" class="auth-form">
+            <div class="field">
+              <label for="settings-theme">Tema visual</label>
+              <select id="settings-theme" name="theme">
+                <option value="light">Claro</option>
+                <option value="dark">Oscuro</option>
+                <option value="glass">Liquid Glass</option>
+              </select>
+            </div>
+            <label class="toggle-row ios-toggle-row">
+              <span>Activar blur</span>
+              <span class="toggle-control">
+                <input id="settings-blur-enabled" type="checkbox" checked />
+                <span class="toggle"></span>
+              </span>
+            </label>
+            <label class="toggle-row ios-toggle-row">
+              <span>Activar animaciones</span>
+              <span class="toggle-control">
+                <input id="settings-animations-enabled" type="checkbox" checked />
+                <span class="toggle"></span>
+              </span>
+            </label>
+            <label class="toggle-row ios-toggle-row">
+              <span>Modo compacto</span>
+              <span class="toggle-control">
+                <input id="settings-compact-mode" type="checkbox" />
+                <span class="toggle"></span>
+              </span>
+            </label>
+            <button class="ghost-btn glass-button" type="submit">Guardar apariencia</button>
+          </form>
+          <p id="settings-appearance-status" class="auth-status"></p>
+        </article>
+
+        <article class="card glass glass-card">
+          <h3>Notifications</h3>
+          <form id="settings-notifications-form" class="auth-form">
+            <label class="toggle-row ios-toggle-row">
+              <span>Activar notificaciones</span>
+              <span class="toggle-control">
+                <input id="settings-notifications-enabled" type="checkbox" />
+                <span class="toggle"></span>
+              </span>
+            </label>
+            <button class="ghost-btn glass-button" type="submit">Guardar notificaciones</button>
+          </form>
+          <p id="settings-notifications-status" class="auth-status"></p>
+        </article>
+
+        <article class="card glass glass-card">
+          <h3>Privacy</h3>
+          <form id="settings-privacy-form" class="auth-form">
+            <label class="toggle-row ios-toggle-row">
+              <span>Cuenta privada</span>
+              <span class="toggle-control">
+                <input id="settings-private-profile" type="checkbox" />
+                <span class="toggle"></span>
+              </span>
+            </label>
+            <label class="toggle-row ios-toggle-row">
+              <span>Modo invisible</span>
+              <span class="toggle-control">
+                <input id="settings-invisible-mode" type="checkbox" />
+                <span class="toggle"></span>
+              </span>
+            </label>
+            <button class="ghost-btn glass-button" type="submit">Guardar privacidad</button>
+          </form>
+          <p id="settings-privacy-status" class="auth-status"></p>
+        </article>
+
+        <article class="card glass glass-card">
+          <h3>General</h3>
+          <form id="settings-general-form" class="auth-form">
+            <div class="field">
+              <label for="settings-language">Idioma</label>
+              <select id="settings-language">
+                <option value="es">Español</option>
+                <option value="en">English</option>
+                <option value="ca">Català</option>
+              </select>
+            </div>
+            <button class="ghost-btn glass-button" type="submit">Guardar preferencias</button>
+          </form>
+          <p id="settings-general-status" class="auth-status"></p>
+        </article>
+
+        <article class="card glass glass-card">
+          <h3>Seguridad</h3>
+          <form id="settings-password-form" class="auth-form">
+            <div class="field"><label for="settings-password">Nueva contraseña</label><input id="settings-password"
+                type="password" minlength="6" /></div>
+            <button class="ghost-btn glass-button" type="submit">Cambiar contraseña</button>
+          </form>
+          <p id="settings-password-status" class="auth-status"></p>
+        </article>
+        <article class="card glass glass-card">
+          <h3>Soporte</h3>
+
+          <!-- CREAR TICKET -->
+          <form id="ticket-form" class="auth-form">
+
+            <div class="field">
+              <label for="ticket-title">Título</label>
+              <input id="ticket-title" type="text" />
+            </div>
+
+            <div class="field">
+              <label for="ticket-category">Categoría</label>
+              <select id="ticket-category">
+                <option value="login">Login</option>
+                <option value="chat">Chat</option>
+                <option value="cuenta">Cuenta</option>
+                <option value="bug">Bug</option>
+                <option value="otro">Otro</option>
+              </select>
+            </div>
+
+            <div class="field">
+              <label for="ticket-info">Descripción</label>
+              <input id="ticket-info" type="text" />
+            </div>
+
+            <button class="ghost-btn glass-button" type="submit">
+              Crear ticket
+            </button>
+          </form>
+
+          <p id="ticket-status" class="auth-status"></p>
+
+          <hr>
+
+          <!-- LISTA DE TICKETS -->
+          <div id="my-tickets" class="admin-history-list"></div>
+        </article>
+
+      </section>
+    </main>
+  </div>
+
+  <script defer src="app.js"></script>
+</body>
+
+</html>

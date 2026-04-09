@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>MyStudent | Tienda</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body data-page="store">
+  <div class="app-shell">
+    <aside class="sidebar">
+      <div class="sidebar-brand">
+        <h1>MyStudent</h1>
+        <p>Educación, progreso y comunidad.</p>
+      </div>
+
+      <nav class="sidebar-nav">
+        <a class="nav-btn" href="dashboard.html">Dashboard</a>
+        <a class="nav-btn" href="profile.html">Perfil</a>
+        <a class="nav-btn" href="chat.html">Chat</a>
+        <a class="nav-btn active" href="store.html">Tienda</a>
+        <a class="nav-btn" href="settings.html">Ajustes</a>
+        <a class="nav-btn hidden" href="admin.html" id="admin-link">Admin</a>
+      </nav>
+
+      <button id="logout-button" class="nav-btn logout" type="button">Cerrar sesión</button>
+    </aside>
+
+    <main class="shell-main">
+      <header class="topbar">
+        <div class="topbar-copy">
+          <h2 id="topbar-title">Tienda</h2>
+          <p>Productos, mejoras y beneficios para tu cuenta.</p>
+        </div>
+
+        <div class="topbar-actions">
+          <div class="notif-shell">
+            <button id="notifications-toggle" class="ghost-btn notif-button" type="button">Notificaciones <span id="notifications-count" class="notif-badge hidden">0</span></button>
+            <div id="notifications-dropdown" class="notif-dropdown hidden"></div>
+          </div>
+          <button id="theme-toggle" class="ghost-btn theme-toggle" type="button">Tema</button>
+          <div class="user-pill">
+            <div class="user-avatar" id="user-avatar">MS</div>
+            <div class="user-meta">
+              <strong id="topbar-username">usuario</strong>
+              <span id="topbar-range">Free</span>
+            </div>
+          </div>
+        </div>
+      </header>
+
+      <section id="announcement-banner" class="announcement-banner hidden"></section>
+
+      <section class="section-hero">
+        <h3>Store</h3>
+        <p>Compra mejoras con tu saldo y revisa tu historial.</p>
+      </section>
+
+      <section class="stats-grid">
+        <article class="stat-card">
+          <span>Saldo</span>
+          <strong id="store-balance">0</strong>
+        </article>
+        <article class="stat-card">
+          <span>Compras</span>
+          <strong id="store-purchase-count">0</strong>
+        </article>
+      </section>
+
+      <section class="store-layout">
+        <article class="card">
+          <h3>Catálogo</h3>
+          <div id="store-catalog" class="store-grid"></div>
+          <p id="store-buy-status" class="auth-status"></p>
+        </article>
+
+        <article class="card">
+          <h3>Historial</h3>
+          <div id="store-history" class="admin-history-list"></div>
+        </article>
+      </section>
+    </main>
+  </div>
+
+  <script defer src="app.js"></script>
+</body>
+</html>

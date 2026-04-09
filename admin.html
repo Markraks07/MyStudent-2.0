@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>MyStudent | Admin</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap"
+    rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+
+<body data-page="admin">
+  <div class="app-shell">
+    <aside class="sidebar">
+      <div class="sidebar-brand">
+        <h1>MyStudent</h1>
+        <p>Educación, progreso y comunidad.</p>
+      </div>
+
+      <nav class="sidebar-nav">
+        <a class="nav-btn" href="dashboard.html">Dashboard</a>
+        <a class="nav-btn" href="profile.html">Perfil</a>
+        <a class="nav-btn" href="chat.html">Chat</a>
+        <a class="nav-btn" href="store.html">Tienda</a>
+        <a class="nav-btn" href="settings.html">Ajustes</a>
+        <a class="nav-btn active" href="admin.html" id="admin-link">Admin</a>
+      </nav>
+
+      <button id="logout-button" class="nav-btn logout" type="button">Cerrar sesión</button>
+    </aside>
+
+    <main class="shell-main">
+      <header class="topbar">
+        <div class="topbar-copy">
+          <h2 id="topbar-title">Panel de administración</h2>
+          <p>Control real por secciones para operar la plataforma.</p>
+        </div>
+
+        <div class="topbar-actions">
+          <div class="notif-shell">
+            <button id="notifications-toggle" class="ghost-btn notif-button" type="button">Notificaciones <span
+                id="notifications-count" class="notif-badge hidden">0</span></button>
+            <div id="notifications-dropdown" class="notif-dropdown hidden"></div>
+          </div>
+          <button id="theme-toggle" class="ghost-btn theme-toggle" type="button">Tema</button>
+          <div class="user-pill">
+            <div class="user-avatar" id="user-avatar">MS</div>
+            <div class="user-meta">
+              <strong id="topbar-username">admin</strong>
+              <span id="topbar-range">Admin</span>
+            </div>
+          </div>
+        </div>
+      </header>
+
+      <section id="announcement-banner" class="announcement-banner hidden"></section>
+
+      <section class="section-hero">
+        <h3>Admin Panel</h3>
+        <p>Usuarios, chat, tienda y anuncios desde una navegación clara y sin saturación.</p>
+      </section>
+
+      <section class="admin-stats" id="admin-stats">
+        <article class="stat-card">
+          <span>Total usuarios</span>
+          <strong id="stat-total-users">0</strong>
+        </article>
+        <article class="stat-card">
+          <span>VIP</span>
+          <strong id="stat-vip-users">0</strong>
+        </article>
+        <article class="stat-card">
+          <span>Admins</span>
+          <strong id="stat-admin-users">0</strong>
+        </article>
+        <article class="stat-card">
+          <span>Baneados</span>
+          <strong id="stat-banned-users">0</strong>
+        </article>
+      </section>
+
+      <section class="admin-nav-tabs">
+        <button class="admin-tab active" data-admin-section="users" type="button">Users Management</button>
+        <button class="admin-tab" data-admin-section="chat" type="button">Chat Management</button>
+        <button class="admin-tab" data-admin-section="store" type="button">Store Management</button>
+        <button class="admin-tab" data-admin-section="announcements" type="button">Announcements</button>
+        <button class="admin-tab" data-admin-section="tickets" type="button">Tickets</button>
+      </section>
+
+      <section id="admin-section-users" class="admin-section">
+        <div class="admin-layout">
+          <div class="admin-main">
+            <article class="table-card">
+              <div class="admin-toolbar">
+                <div>
+                  <h3>Usuarios</h3>
+                  <p>Busca, revisa, edita y modera cuentas.</p>
+                </div>
+                <input id="admin-user-search" class="admin-search" type="text" placeholder="Buscar usuario" />
+              </div>
+
+              <div class="table-wrap">
+                <table class="users-table">
+                  <thead>
+                    <tr>
+                      <th>Nombre</th>
+                      <th>Username</th>
+                      <th>Curso</th>
+                      <th>XP</th>
+                      <th>Nivel</th>
+                      <th>Rol</th>
+                      <th>Rango</th>
+                      <th>Estado</th>
+                      <th>Acciones</th>
+                    </tr>
+                  </thead>
+                  <tbody id="users-table-body">
+                    <tr>
+                      <td colspan="9" class="muted">Cargando usuarios...</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </article>
+
+            <article class="card">
+              <div class="admin-toolbar">
+                <div>
+                  <h3>Busqueda global</h3>
+                  <p>Usuarios, grupos y tienda en una sola vista.</p>
+                </div>
+                <input id="admin-global-search" class="admin-search" type="text"
+                  placeholder="Buscar en toda la plataforma" />
+              </div>
+              <div id="admin-global-search-results" class="admin-history-list">
+                <div class="center-note">Empieza a escribir para buscar.</div>
+              </div>
+            </article>
+          </div>
+
+          <aside class="admin-side">
+            <article class="card">
+              <h3>Detalle de usuario</h3>
+              <form id="admin-user-form" class="auth-form">
+                <input type="hidden" id="admin-edit-uid" />
+                <div class="form-grid">
+                  <div class="field">
+                    <label for="admin-edit-name">Nombre</label>
+                    <input id="admin-edit-name" type="text" />
+                  </div>
+                  <div class="field">
+                    <label for="admin-edit-lastname">Apellido</label>
+                    <input id="admin-edit-lastname" type="text" />
+                  </div>
+                </div>
+                <div class="form-grid">
+                  <div class="field">
+                    <label for="admin-edit-username">Username</label>
+                    <input id="admin-edit-username" type="text" />
+                  </div>
+                  <div class="field">
+                    <label for="settings-course">Curso</label>
+                    <select id="settings-course" name="curso">
+                      <option value="">Selecciona tu etapa</option>
+                      <option value="ESO">1º ESO</option>
+                      <option value="ESO">2º ESO</option>
+                      <option value="ESO">3º ESO</option>
+                      <option value="ESO">4º ESO</option>
+                      <option value="Bachillerato">Bachillerato</option>
+                      <option value="FP">FP</option>
+                      <option value="Universidad">Universidad</option>
+                      <option value="Oposiciones">Oposiciones</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="form-grid">
+                  <div class="field">
+                    <label for="admin-edit-role">Rol</label>
+                    <input id="admin-edit-role" type="text" />
+                  </div>
+                  <div class="field">
+                    <label for="admin-edit-range">Rango</label>
+                    <input id="admin-edit-range" type="text" />
+                  </div>
+                </div>
+                <div class="form-grid">
+                  <div class="field">
+                    <label for="admin-edit-xp">XP</label>
+                    <input id="admin-edit-xp" type="number" min="0" />
+                  </div>
+                  <div class="field">
+                    <label for="admin-edit-level">Nivel</label>
+                    <input id="admin-edit-level" type="number" min="1" />
+                  </div>
+                </div>
+                <div class="field">
+                  <label>Contraseña</label>
+                  <div class="readonly-note">No visible en Firebase Auth por seguridad</div>
+                </div>
+                <div class="admin-inline-actions">
+                  <button class="primary-btn" type="submit">Guardar</button>
+                  <button class="ghost-btn" id="admin-reset-xp" type="button">Reset XP</button>
+                  <button class="ghost-btn" id="admin-open-dm" type="button">Abrir chat</button>
+                </div>
+              </form>
+              <p id="admin-user-form-status" class="auth-status"></p>
+            </article>
+          </aside>
+        </div>
+      </section>
+
+      <section id="admin-section-chat" class="admin-section hidden">
+        <div class="settings-grid">
+          <article class="card">
+            <h3>Configuración del chat</h3>
+            <form id="admin-chat-settings-form" class="auth-form">
+              <label class="toggle-row">
+                <input id="chat-enabled" type="checkbox" />
+                <span>Activar chat general</span>
+              </label>
+              <div class="field">
+                <label for="chat-min-range">Rango mínimo</label>
+                <select id="chat-min-range">
+                  <option value="Free">Free</option>
+                  <option value="VIP">VIP</option>
+                  <option value="admin">Admin</option>
+                </select>
+              </div>
+              <div class="field">
+                <label for="chat-write-mode">Quién puede escribir</label>
+                <select id="chat-write-mode">
+                  <option value="all">Todos</option>
+                  <option value="vip">VIP y admin</option>
+                  <option value="admin">Solo admin</option>
+                </select>
+              </div>
+              <button class="primary-btn" type="submit">Guardar configuración</button>
+            </form>
+            <p id="admin-chat-settings-status" class="auth-status"></p>
+          </article>
+
+          <article class="card">
+            <h3>Historial y moderación</h3>
+            <div id="admin-chat-history" class="admin-history-list"></div>
+          </article>
+
+          <article class="card">
+            <h3>Limpieza automática</h3>
+            <form id="admin-chat-clean-form" class="auth-form">
+              <div class="field">
+                <label for="chat-clean-days">Borrar mensajes con más de</label>
+                <input id="chat-clean-days" type="number" min="1" max="365" value="30" />
+              </div>
+              <button class="ghost-btn" type="submit">Ejecutar limpieza</button>
+            </form>
+            <p id="admin-chat-clean-status" class="auth-status"></p>
+          </article>
+
+          <article class="card">
+            <h3>Inspección de chats privados</h3>
+            <form id="admin-chat-inspector-form" class="auth-form">
+              <div class="form-grid">
+                <div class="field">
+                  <label for="inspect-user-a">Usuario A</label>
+                  <input id="inspect-user-a" type="text" placeholder="uid o username" />
+                </div>
+                <div class="field">
+                  <label for="inspect-user-b">Usuario B</label>
+                  <input id="inspect-user-b" type="text" placeholder="uid o username" />
+                </div>
+              </div>
+              <button class="ghost-btn" type="submit">Ver conversación</button>
+            </form>
+            <div id="admin-chat-inspector-results" class="admin-history-list"></div>
+            <p id="admin-chat-inspector-status" class="auth-status"></p>
+          </article>
+        </div>
+      </section>
+
+      <section id="admin-section-store" class="admin-section hidden">
+        <div class="settings-grid">
+          <article class="card">
+            <h3>Crear producto</h3>
+            <form id="store-product-form" class="auth-form">
+              <div class="field">
+                <label for="store-product-name">Nombre</label>
+                <input id="store-product-name" type="text" />
+              </div>
+              <div class="form-grid">
+                <div class="field">
+                  <label for="store-product-type">Tipo</label>
+                  <input id="store-product-type" type="text" placeholder="vip / xp / nivel" />
+                </div>
+                <div class="field">
+                  <label for="store-product-price">Precio</label>
+                  <input id="store-product-price" type="number" min="0" />
+                </div>
+              </div>
+              <div class="field">
+                <label for="store-product-value">Valor</label>
+                <input id="store-product-value" type="text" />
+              </div>
+              <label class="toggle-row">
+                <input id="store-product-active" type="checkbox" checked />
+                <span>Producto activo</span>
+              </label>
+              <button class="primary-btn" type="submit">Guardar producto</button>
+            </form>
+            <p id="store-product-status" class="auth-status"></p>
+          </article>
+
+          <article class="card">
+            <h3>Productos</h3>
+            <div id="store-products-list" class="admin-history-list"></div>
+          </article>
+
+          <article class="card">
+            <h3>Compras</h3>
+            <div id="store-purchases-list" class="admin-history-list"></div>
+          </article>
+        </div>
+      </section>
+
+      <section id="admin-section-announcements" class="admin-section hidden">
+        <div class="settings-grid">
+          <article class="card">
+            <h3>Crear anuncio global</h3>
+            <form id="announcement-form" class="auth-form">
+              <div class="field">
+                <label for="announcement-title">Título</label>
+                <input id="announcement-title" type="text" />
+              </div>
+              <div class="field">
+                <label for="announcement-message">Mensaje</label>
+                <input id="announcement-message" type="text" />
+              </div>
+              <label class="toggle-row">
+                <input id="announcement-active" type="checkbox" checked />
+                <span>Mostrar a todos los usuarios</span>
+              </label>
+              <button class="primary-btn" type="submit">Publicar</button>
+            </form>
+            <p id="announcement-status" class="auth-status"></p>
+          </article>
+
+          <article class="card">
+            <h3>Anuncios activos</h3>
+            <div id="announcements-list" class="admin-history-list"></div>
+          </article>
+        </div>
+      </section>
+      <section id="admin-section-tickets" class="admin-section hidden">
+        <div class="settings-grid">
+
+          <!-- LISTA DE TICKETS -->
+          <article class="card">
+            <h3>Tickets</h3>
+            <div id="admin-tickets-list" class="admin-history-list"></div>
+          </article>
+
+          <!-- DETALLE DEL TICKET -->
+          <article class="card">
+            <h3 id="ticket-title">Detalle</h3>
+
+            <p id="ticket-info" class="auth-status"></p>
+
+            <div class="field">
+              <label>Asignar admin</label>
+              <select id="assign-admin"></select>
+            </div>
+
+            <div class="field">
+              <label>Estado</label>
+              <select id="ticket-status-select">
+                <option value="open">Open</option>
+                <option value="pending">Pending</option>
+                <option value="closed">Closed</option>
+              </select>
+            </div>
+
+            <div class="actions-row">
+              <button class="primary-btn" onclick="assignSelectedAdmin()">Asignar</button>
+              <button class="secondary-btn" onclick="updateStatus()">Actualizar estado</button>
+            </div>
+
+            <hr>
+
+            <div id="ticket-chat" class="admin-history-list"></div>
+
+            <div class="field">
+              <input id="admin-message" type="text" placeholder="Responder..." />
+            </div>
+
+            <button class="primary-btn" onclick="sendAdminMessage()">Enviar</button>
+
+          </article>
+
+        </div>
+      </section>
+
+    </main>
+  </div>
+  <script defer src="app.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>MyStudent | Chat</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body data-page="chat">
+  <div class="app-shell">
+    <aside class="sidebar">
+      <div class="sidebar-brand">
+        <h1>MyStudent</h1>
+        <p>Educacion, progreso y comunidad.</p>
+      </div>
+
+      <nav class="sidebar-nav">
+        <a class="nav-btn" href="dashboard.html">Dashboard</a>
+        <a class="nav-btn" href="profile.html">Perfil</a>
+        <a class="nav-btn active" href="chat.html">Chat</a>
+        <a class="nav-btn" href="store.html">Tienda</a>
+        <a class="nav-btn" href="settings.html">Ajustes</a>
+        <a class="nav-btn hidden" href="admin.html" id="admin-link">Admin</a>
+      </nav>
+
+      <button id="logout-button" class="nav-btn logout" type="button">Cerrar sesion</button>
+    </aside>
+
+    <main class="shell-main">
+      <header class="topbar">
+        <div class="topbar-copy">
+          <h2 id="topbar-title">Chats</h2>
+          <p>General, grupos, privados, amigos y solicitudes en una interfaz mas limpia.</p>
+        </div>
+
+        <div class="topbar-actions">
+          <div class="notif-shell">
+            <button id="notifications-toggle" class="ghost-btn notif-button" type="button">Notificaciones <span id="notifications-count" class="notif-badge hidden">0</span></button>
+            <div id="notifications-dropdown" class="notif-dropdown hidden"></div>
+          </div>
+          <button id="theme-toggle" class="ghost-btn theme-toggle" type="button">Tema</button>
+          <div class="user-pill">
+            <div class="user-avatar" id="user-avatar">MS</div>
+            <div class="user-meta">
+              <strong id="topbar-username">usuario</strong>
+              <span id="topbar-range">Free</span>
+            </div>
+          </div>
+        </div>
+      </header>
+
+      <section id="announcement-banner" class="announcement-banner hidden"></section>
+
+      <section class="section-hero chat-page-hero">
+        <div>
+          <h3>Comunicacion</h3>
+          <p>Habla con otros estudiantes, organiza grupos y manten tus conversaciones ordenadas.</p>
+        </div>
+        <div class="chat-overview-pills">
+          <span class="mini-chip">General</span>
+          <span class="mini-chip">Grupos</span>
+          <span class="mini-chip">Privados</span>
+        </div>
+      </section>
+
+      <section class="chat-tabs glass-nav">
+        <button class="chat-tab active" data-chat-section="general" type="button">Chat General</button>
+        <button class="chat-tab" data-chat-section="groups" type="button">Groups</button>
+        <button class="chat-tab" data-chat-section="private" type="button">Private Chats</button>
+        <button class="chat-tab" data-chat-section="friends" type="button">Friends</button>
+        <button class="chat-tab" data-chat-section="requests" type="button">Requests</button>
+      </section>
+
+      <section id="chat-section-general" class="chat-section">
+        <div class="chat-module-grid">
+          <aside class="chat-panel card side chat-info-panel">
+            <div class="chat-panel-head">
+              <div>
+                <h3>General</h3>
+                <p>Canal comun de la plataforma.</p>
+              </div>
+            </div>
+            <div class="stack-list">
+              <div class="conversation-card">
+                <strong>Acceso</strong>
+                <p>Disponible segun tu rango y las reglas globales.</p>
+              </div>
+              <div class="conversation-card">
+                <strong>Experiencia</strong>
+                <p>Mensajes mas claros, mejor lectura y composicion fija abajo.</p>
+              </div>
+            </div>
+          </aside>
+
+          <article class="chat-panel card chat-room-panel">
+            <div class="chat-panel-head">
+              <div>
+                <h3>Canal global</h3>
+                <p id="general-chat-meta">Chat global de la plataforma.</p>
+              </div>
+              <div class="inline-meta">
+                <span class="mini-chip" id="general-chat-access">Disponible</span>
+                <span class="badge free" id="general-chat-rank">Free</span>
+              </div>
+            </div>
+
+            <div id="general-chat-messages" class="chat-stream"></div>
+
+            <form id="general-chat-form" class="chat-compose chat-compose-ios">
+              <input id="general-chat-input" type="text" maxlength="400" placeholder="Escribe en el chat general..." />
+              <div class="chat-compose-actions">
+                <button id="general-emoji-toggle" class="ghost-btn" type="button">Emoji</button>
+                <button class="primary-btn" type="submit">Enviar</button>
+              </div>
+            </form>
+            <div id="general-emoji-picker" class="emoji-picker hidden"></div>
+            <p id="general-chat-status" class="auth-status"></p>
+          </article>
+        </div>
+      </section>
+
+      <section id="chat-section-groups" class="chat-section hidden">
+        <div class="chat-module-grid">
+          <aside class="chat-panel card side chat-list-panel">
+            <div class="chat-panel-head">
+              <div>
+                <h3>Grupos</h3>
+                <p>Publicos o privados con solicitudes.</p>
+              </div>
+            </div>
+            <div id="groups-list" class="chat-list"></div>
+          </aside>
+
+          <article class="chat-panel card chat-room-panel">
+            <div class="chat-panel-head">
+              <div>
+                <h3 id="group-room-title">Selecciona un grupo</h3>
+                <p id="group-room-meta">Crea un grupo o entra en uno existente.</p>
+              </div>
+              <div class="inline-meta">
+                <span class="mini-chip hidden" id="group-room-membership">Miembro</span>
+              </div>
+              <div class="inline-meta">
+                <button id="create-group-toggle" class="ghost-btn" type="button">Nuevo grupo</button>
+              </div>
+            </div>
+
+            <form id="create-group-form" class="auth-form hidden">
+              <div class="field">
+                <label for="group-name">Nombre del grupo</label>
+                <input id="group-name" type="text" />
+              </div>
+              <div class="field">
+                <label for="group-description">Descripcion</label>
+                <input id="group-description" type="text" />
+              </div>
+              <div class="form-grid">
+                <div class="field">
+                  <label for="group-image">Imagen opcional</label>
+                  <input id="group-image" type="text" placeholder="URL opcional" />
+                </div>
+                <div class="field">
+                  <label for="group-privacy">Privacidad</label>
+                  <select id="group-privacy">
+                    <option value="public">Publico</option>
+                    <option value="private">Privado</option>
+                  </select>
+                </div>
+              </div>
+              <button class="primary-btn" type="submit">Crear grupo</button>
+              <p id="group-create-status" class="auth-status"></p>
+            </form>
+
+            <div id="group-chat-messages" class="chat-stream"></div>
+            <div id="group-typing-indicator" class="typing-indicator hidden" aria-live="polite"></div>
+            <section id="group-management-panel" class="group-management-panel hidden">
+              <div class="chat-panel-head compact">
+                <div>
+                  <h4>Gestion del grupo</h4>
+                  <p id="group-management-meta">Roles, miembros y acceso.</p>
+                </div>
+              </div>
+              <div id="group-members-list" class="stack-list"></div>
+              <p id="group-management-status" class="auth-status"></p>
+            </section>
+
+            <form id="group-chat-form" class="chat-compose chat-compose-ios">
+              <input id="group-chat-input" type="text" maxlength="400" placeholder="Escribe en el grupo..." />
+              <div class="chat-compose-actions">
+                <input id="group-file-input" type="file" class="hidden" accept="image/*,.pdf,.doc,.docx,.txt,.zip,.rar,.ppt,.pptx,.xls,.xlsx" />
+                <button id="group-file-toggle" class="ghost-btn" type="button">Adjuntar</button>
+                <button id="group-emoji-toggle" class="ghost-btn" type="button">Emoji</button>
+                <button class="primary-btn" type="submit">Enviar</button>
+              </div>
+            </form>
+            <div id="group-emoji-picker" class="emoji-picker hidden"></div>
+            <p id="group-chat-status" class="auth-status"></p>
+          </article>
+        </div>
+      </section>
+
+      <section id="chat-section-private" class="chat-section hidden">
+        <div class="chat-module-grid">
+          <aside class="chat-panel card side chat-list-panel">
+            <div class="chat-panel-head">
+              <div>
+                <h3>Privados</h3>
+                <p>Conversaciones activas 1 a 1.</p>
+              </div>
+            </div>
+            <div id="private-chat-list" class="chat-list"></div>
+          </aside>
+
+          <article class="chat-panel card chat-room-panel">
+            <div class="chat-panel-head">
+              <div>
+                <h3 id="private-room-title">Selecciona una conversacion</h3>
+                <p id="private-room-meta">Tus chats directos apareceran aqui.</p>
+              </div>
+              <div class="inline-meta">
+                <span class="mini-chip hidden" id="private-room-presence">Offline</span>
+              </div>
+            </div>
+
+            <div id="private-chat-messages" class="chat-stream"></div>
+            <div id="private-typing-indicator" class="typing-indicator hidden" aria-live="polite"></div>
+
+            <form id="private-chat-form" class="chat-compose chat-compose-ios">
+              <input id="private-chat-input" type="text" maxlength="400" placeholder="Escribe un mensaje privado..." />
+              <div class="chat-compose-actions">
+                <input id="private-file-input" type="file" class="hidden" accept="image/*,.pdf,.doc,.docx,.txt,.zip,.rar,.ppt,.pptx,.xls,.xlsx" />
+                <button id="private-file-toggle" class="ghost-btn" type="button">Adjuntar</button>
+                <button id="private-emoji-toggle" class="ghost-btn" type="button">Emoji</button>
+                <button class="primary-btn" type="submit">Enviar</button>
+              </div>
+            </form>
+            <div id="private-emoji-picker" class="emoji-picker hidden"></div>
+            <p id="private-chat-status" class="auth-status"></p>
+          </article>
+        </div>
+      </section>
+
+      <section id="chat-section-friends" class="chat-section hidden">
+        <div class="chat-module-grid">
+          <article class="chat-panel card">
+            <div class="chat-panel-head">
+              <div>
+                <h3>Usuarios</h3>
+                <p>Inicia contacto segun la privacidad de cada cuenta.</p>
+              </div>
+              <input id="friends-search" class="admin-search" type="text" placeholder="Buscar usuarios" />
+            </div>
+            <div id="users-directory-list" class="stack-list"></div>
+          </article>
+
+          <article class="chat-panel card">
+            <div class="chat-panel-head">
+              <div>
+                <h3>Amigos</h3>
+                <p>Gestiona tu red y abre chats privados.</p>
+              </div>
+            </div>
+            <div id="friends-list" class="stack-list"></div>
+          </article>
+        </div>
+      </section>
+
+      <section id="chat-section-requests" class="chat-section hidden">
+        <div class="chat-module-grid">
+          <article class="chat-panel card">
+            <div class="chat-panel-head">
+              <div>
+                <h3>Solicitudes de amistad</h3>
+                <p>Pendientes de aceptar o rechazar.</p>
+              </div>
+            </div>
+            <div id="friend-requests-list" class="stack-list"></div>
+          </article>
+
+          <article class="chat-panel card">
+            <div class="chat-panel-head">
+              <div>
+                <h3>Solicitudes de grupos</h3>
+                <p>Para grupos privados donde eres admin o creador.</p>
+              </div>
+            </div>
+            <div id="group-requests-list" class="stack-list"></div>
+          </article>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <div id="chat-hover-card" class="user-hover-card hidden"></div>
+
+  <script defer src="app.js"></script>
+  <script defer src="chat-system.js"></script>
+</body>
+</html>
